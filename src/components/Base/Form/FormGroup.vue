@@ -1,0 +1,36 @@
+<template>
+  <div class="flex flex-col gap-2 w-full">
+    <div class="flex-center-between w-full" :class="labelWrapperClass">
+      <FormLabel
+        :label="label"
+        :label-class="labelClass"
+        v-bind="{ forText, required }"
+      />
+      <slot name="labelOpposite" />
+    </div>
+    <slot />
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { defineComponent } from "vue";
+
+import FormLabel from "@/components/Base/Form/Label/FormLabel.vue";
+import { TClassName } from "@/types/common";
+
+defineComponent({
+  name: "FormGroup",
+});
+
+interface Props {
+  label?: string;
+  required?: boolean;
+  forText?: string;
+  labelClass?: TClassName;
+  labelWrapperClass?: TClassName;
+}
+
+withDefaults(defineProps<Props>(), {
+  label: "",
+});
+</script>
