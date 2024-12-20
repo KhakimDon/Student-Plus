@@ -9,15 +9,6 @@ export default [
     component: () => import("@/modules/user/pages/PUsers.vue"),
   },
   {
-    path: "/users/create",
-    name: "UsersCreate",
-    meta: {
-      layout: "default",
-      // auth: true,
-    },
-    component: () => import("@/modules/user/pages/PCreate.vue"),
-  },
-  {
     path: "/users/:id",
     name: "UsersSingle",
     meta: {
