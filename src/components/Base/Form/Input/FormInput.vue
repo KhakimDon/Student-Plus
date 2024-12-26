@@ -1,27 +1,26 @@
 <template>
   <label
-    :class="[
+      :class="[
       error
         ? '!bg-red-secondary !border-red'
-        : 'focus-within:bg-transparent focus-within:border-yellow-dark',
+        : 'focus-within:bg-white focus-within:border-blue-dark',
       {
-        'read-only:focus-within:bg-gray-300 read-only:focus-within:border-transparent hover:bg-white-100':
+        'read-only:focus-within:bg-gray-300 read-only:focus-within:border-transparent hover:bg-white-1':
           readonly,
       },
     ]"
-    :for="id"
-    class="inline-flex items-center justify-start gap-2 relative transition-all duration-300 bg-dark-2/5 rounded-lg border border-transparent overflow-hidden w-full group cursor-text py-2.5 px-3"
-    @click="inputEl.focus()"
+      :for="id"
+      class="inline-flex items-center justify-start gap-2 h-10 relative transition-all duration-300 bg-white-1 rounded-lg border border-transparent overflow-hidden w-full group cursor-text py-2.5 px-3"
+      @click="inputEl.focus()"
   >
-    <slot name="prefix" />
-
+    <slot name="prefix"/>
     <input
-      ref="inputEl"
-      v-model="value"
-      :class="inputClass"
-      autocomplete="off"
-      class="w-full font-normal text-sm leading-4 text-dark-black placeholder:text-gray-1 bg-transparent flex-grow outline-none disabled:text-gray disabled:hover:cursor-not-allowed caret-yellow-dark"
-      v-bind="{
+        ref="inputEl"
+        v-model="value"
+        :class="inputClass"
+        autocomplete="off"
+        class="w-full font-normal text-sm leading-4 text-dark-black placeholder:text-gray-1 bg-transparent flex-grow outline-none disabled:text-gray disabled:hover:cursor-not-allowed caret-blue-dark"
+        v-bind="{
         id,
         type,
         minlength,
@@ -32,34 +31,21 @@
         placeholder,
         readonly,
       }"
-      @blur="$emit('blur')"
-      @change="$emit('change')"
-      @focus="$emit('focus')"
+        @blur="$emit('blur')"
+        @change="$emit('change')"
+        @focus="$emit('focus')"
     />
 
-    <slot name="suffix" />
+    <slot name="suffix"/>
   </label>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import {ref} from "vue";
 
-export interface Props {
-  id?: string;
-  type?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  error?: boolean;
-  readonly?: boolean;
-  maxlength?: number | string;
-  minlength?: number | string;
-  max?: number | string;
-  min?: number | string;
-  inputClass?: string | string[];
-  autocomplete?: boolean;
-}
+import {InputProps} from "@/types/components";
 
-defineProps<Props>();
+defineProps<InputProps>();
 
 interface Emits {
   (event: "blur"): void;
@@ -74,7 +60,7 @@ defineEmits<Emits>();
 const value = defineModel<string>();
 
 const inputEl = ref();
-defineExpose({ inputEl });
+defineExpose({inputEl});
 </script>
 
 <style scoped>

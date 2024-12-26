@@ -1,0 +1,11 @@
+{
+  "__comment": "This is a comment",
+  "menu": {
+    "sidebar": {
+      "main": "Главная"
+    }
+  },
+  "breadcrumb": {
+    "home": "Главная"
+  }
+}

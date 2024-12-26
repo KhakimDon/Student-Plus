@@ -1,24 +1,32 @@
 <template>
   <div
-    :class="[sizeClasses, avatarClass]"
-    class="rounded-full relative overflow-hidden after:absolute after:inset-0 after:rounded-full after:border after:border-solid after:border-white/16 shrink-0"
+      :class="[sizeClasses, avatarClass]"
+      class="rounded-full relative overflow-hidden after:absolute after:inset-0 after:rounded-full after:border after:border-solid after:border-white/16 shrink-0"
   >
-    <BaseImage
-      :src="image"
-      default-src="/images/default/avatar.svg"
-      class="w-full h-full"
+    <!--    <BaseShimmer v-bind="{ loading }" width="100%" height="100%">-->
+    <img
+        v-if="image"
+        :src="image"
+        alt="avatar-image"
+        class="w-full h-full object-cover"
     />
+    <img
+        v-else
+        alt="avatar-default-image"
+        class="w-full h-full object-cover"
+        src="/images/default/avatar.svg"
+    />
+    <!--    </BaseShimmer>-->
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import {computed} from "vue";
 
-import BaseImage from "@/components/Base/BaseImage.vue";
-import { TClassName } from "@/types/common";
+import type {TClassName} from "@/types/common";
 
 interface Props {
-  image: string;
+  image?: string;
   size?: "xs" | "sm" | "md" | "lg";
   avatarClass?: TClassName;
   loading?: boolean;
@@ -27,14 +35,15 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   size: "sm",
   avatarClass: undefined,
+  image: undefined,
 });
 
 const sizeClasses = computed(() => {
   const size = props.size;
   return {
-    "size-8": size === "sm",
-    "size-9": size === "md",
-    "size-24": size === "lg",
+    "w-8 h-8": size === "sm",
+    "w-10 h-10": size === "md",
+    "w-[120px] h-[120px]": size === "lg",
   };
 });
 </script>

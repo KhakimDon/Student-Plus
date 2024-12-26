@@ -1,51 +1,42 @@
 <template>
-  <div class="relative w-full h-screen flex justify-between">
-    <div class="container flex flex-col items-center justify-between py-12">
-      <div></div>
+  <div class="grid grid-cols-10">
+    <div
+        class="relative flex-center-between col-span-6 flex-col py-12 overflow-y-scroll max-h-screen bg-white gap-4"
+    >
+      <div class="h-[calc(100%-100px)] flex-center w-full max-w-sm shrink-0">
+        <slot/>
+      </div>
 
-      <Transition mode="out-in" name="fade">
-        <div :key="$route.name" class="w-[335px]">
-          <slot />
-        </div>
-      </Transition>
-
-      <!--TODO: dont forget to remove this div when you want to show version-->
-      <div />
-
-      <div v-if="false" class="flex flex-col text-center gap-2">
-        <p
-          class="text-xs font-normal leading-normal text-gray-0 underline hover:text-yellow-dark transition-300"
+      <div class="text-center flex flex-col gap-3">
+        <RouterLink
+            class="text-xs font-normal underline text-gray-1 leading-normal"
+            target="_blank"
+            to="/privacy-policy"
         >
           {{ $t("privacy_policy") }}
-        </p>
-        <p class="text-xs font-normal leading-normal text-gray-0">
-          {{ $t("version") }} 1.0.0
+        </RouterLink>
+
+        <p class="text-xs leading-normal text-gray-1">
+          {{ $t("version", {version: CONFIG.APP_VERSION}) }}
         </p>
       </div>
     </div>
-    <div
-      class="max-w-[597px] h-full aspect-[597/900] bg-[url('/images/pattern/auth-pattern.webp')] bg-no-repeat bg-center bg-cover flex flex-col items-center gap-7 pt-[220px]"
-    >
-      <img
-        alt="Auth coins"
-        class="max-w-[278px] w-full"
-        src="/images/pattern/auth-coins.svg"
-      />
-      <p class="text-base text-white leading-130 font-normal">
-        {{ $t("invest_to_your_future") }}
-      </p>
+
+    <div class="col-span-4 h-svh bg-primary bg-image relative flex-center">
+      <!--      <img alt="auto24 logo svg" src="/images/auth/logo.svg" />-->
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from "vue-router";
-
-import { useAuthStore } from "@/modules/auth/store";
-
-const { access } = useAuthStore().getTokens;
-const router = useRouter();
-if (access) {
-  router.push({ name: "Dashboard" });
-}
+import {CONFIG} from "@/config";
 </script>
+
+<style scoped>
+.bg-image {
+  //background-image: url("/images/auth/banner.avif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+</style>

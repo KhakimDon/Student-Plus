@@ -1,49 +1,43 @@
 <template>
-  <div class="h-full bg-white rounded-xl flex-center gap-8 flex-col">
-    <img src="/images/svg/404.svg" alt="" />
-    <div class="flex-center flex-col gap-1">
-      <h1
-        class="text-center text-xl text-dark-black w-full leading-130 font-semibold"
-      >
-        {{ $t("page_not_found") }}
-      </h1>
-      <p
-        class="leading-130 text-gray-11 font-normal text-sm max-w-[373px] text-center"
-      >
-        {{ $t("page_not_found_description") }}
-      </p>
-    </div>
-    <div class="flex justify-center md:justify-start space-x-3">
-      <RouterLink :to="{ name: 'Dashboard' }">
-        <BaseButton
-          :text="$t('main_page')"
-          icon-position="left"
-          icon="icon-home !text-xl !leading-5"
+  <LDefault>
+    <div
+        class="w-full grid place-items-center h-[calc(100svh-120px)] bg-white rounded-xl"
+    >
+      <div class="flex flex-col gap-8 items-center">
+        <img
+            :src="`/images/${status}.avif`"
+            alt="404"
+            class="max-w-xl h-72 mx-auto"
         />
-      </RouterLink>
-      <a :href="`tel:${CONFIG.CALL_CENTER}`">
-        <BaseButton
-          :text="$t('support')"
-          icon-position="left"
-          variant="gray"
-          icon="icon-call-calling !text-xl !leading-5"
-        />
-      </a>
+
+        <div class="!leading-normal">
+          <h1 class="text-center font-bold text-xl text-dark">
+            {{ $t(`error.${status}.title`) }}
+          </h1>
+          <p
+              class="leading-snug text-gray-1 w-full max-w-sm mx-auto text-center"
+          >
+            {{ $t(`error.${status}.info`) }}
+          </p>
+        </div>
+
+        <RouterLink :to="{ name: 'Dashboard' }">
+          <BaseButton
+              icon="icon-home text-xl"
+              icon-position="left"
+              text="button.back_to_main"
+          />
+        </RouterLink>
+      </div>
     </div>
-  </div>
+  </LDefault>
 </template>
 
-<script setup lang="ts">
-import BaseButton from "@/components/Base/Button/BaseButton.vue";
-import { CONFIG } from "@/config";
+<script lang="ts" setup>
+import {computed} from "vue";
 
-function reload() {
-  window.location.reload();
-}
+import {BaseButton} from "@/components/Base";
+import LDefault from "@/layout/LDefault.vue";
+
+const status = computed(() => sessionStorage.getItem("error-status") || 404);
 </script>
-
-<style scoped>
-.particle {
-  opacity: 0.06;
-}
-</style>

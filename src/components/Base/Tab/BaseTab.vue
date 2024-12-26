@@ -1,77 +1,101 @@
 <template>
   <div
-    :class="[tabVariants[variant]?.wrapperClass, $attrs.class]"
-    class="relative w-max flex transition-300"
+      :class="[tabVariants[variant]?.wrapperClass, $attrs.class, wrapperClass]"
+      class="relative w-max flex transition-200"
   >
     <div
-      :class="tabVariants[variant]?.activeClass"
-      :style="{ width: `${active?.width}`, left: `${active?.left}px` }"
-      class="absolute rounded-[3px] bg-blue-primary transition-300"
+        :class="[tabVariants[variant]?.activeClass, customActiveClasses]"
+        :style="{ width: active?.width, left: active?.left }"
+        class="absolute -t-[3px] bg-blue-primary transition-200"
     />
-
     <button
-      v-for="(tab, idx) in list"
-      :id="`item-${variant}-${tab.value}`"
-      :key="idx"
-      :class="[
+        v-for="(tab, idx) in list"
+        :id="`item-${variant}-${tab.value}`"
+        :key="`item-${variant}-${tab.value}-${idx}`"
+        :class="[
+        itemClass,
         tabVariants[variant]?.itemClass,
-        modelValue === tab.value ? tabVariants[variant]?.itemActiveClass : '',
-        modelValue === tab.value ? 'text-black' : 'text-dark-black',
+        modelValue == tab.value
+          ? `${tabVariants[variant]?.itemActiveClass} ${itemActiveClass} opacity-100`
+          : '',
       ]"
-      class="transition-300 w-full text-base flex-center font-medium tabs whitespace-nowrap gap-1 relative z-1"
-      @click="pick(tab.value, $event)"
+        class="transition-200 w-full text-base text-black/70 flex-center font-medium tabs whitespace-nowrap gap-1 relative z-1 cursor-pointer opacity-90 hover:opacity-100"
+        @click="(e) => pick(tab.value, { target: e.target })"
     >
-      {{ tab.label }}
 
-      <span
-        v-if="tab.suffixText"
-        :class="tabVariants[variant]?.suffixClass"
-        class="px-1 py-px rounded-md text-xs"
-      >
-        {{ tab.suffixText }}
-      </span>
+      <img v-if="tab.img" :alt="tab.label" :src="tab?.img" class="size-5"/>
+
+      {{ tab.label }}
+      <Transition mode="out-in" name="slide-right">
+        <slot name="suffix">
+          <span
+              v-if="tab.suffixText"
+              :class="[tabVariants[variant]?.suffixClass, suffixClass]"
+              class="px-1 py-px -md text-xs pointer-events-none"
+          >
+            {{ tab.suffixText }}
+          </span>
+        </slot>
+      </Transition>
     </button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, watch } from "vue";
+import {onMounted, ref, watch} from "vue";
 
-import { tabVariants } from "@/data/variants";
-import { TabProps } from "@/types/components";
+import type {TabProps} from "@/types/components";
+import {tabVariants} from "@/data/variants";
+import {debounce} from "@/utils/time";
 
 const modelValue = defineModel<string | number>("modelValue", {
   required: true,
 });
 
-const props = withDefaults(defineProps<TabProps>(), {
-  variant: "default",
+const props = withDefaults(
+    defineProps<TabProps & { customActiveClasses?: string }>(),
+    {
+      variant: "default",
+      customActiveClasses: "",
+    }
+);
+
+const active = ref({
+  left: "0px",
+  width: "0px",
 });
 
-const active = ref({ left: 0, width: "0px" });
+const pick = (tab: string | number, e?: { target: EventTarget | null }) => {
+  const target = e?.target instanceof HTMLButtonElement ? e.target : null;
 
-const pick = (tab: string | number, e?: { target: HTMLButtonElement }) => {
-  const target = e?.target as HTMLButtonElement;
   if (target) {
     active.value = {
-      left: target.offsetLeft,
-      width: target.offsetWidth + "px",
+      left: target.offsetLeft + "px",
+      width: `${target.offsetWidth}px`,
     };
   }
-  modelValue.value = tab; // Update the modelValue directly
+  modelValue.value = tab;
 };
 
 function checkValue() {
   const item = document.getElementById(
-    `item-${props.variant}-${modelValue.value}`
+      `item-${props.variant}-${modelValue.value}`
   ) as HTMLButtonElement;
 
-  pick(modelValue.value, { target: item });
+  pick(modelValue.value, {target: item});
 }
 
-watch(modelValue, checkValue, { immediate: true });
+watch(
+    modelValue,
+    () => debounce(`item-select-${props.variant}-${Date.now()}`, checkValue, 100),
+    {
+      immediate: true,
+    }
+);
 
-onMounted(checkValue);
-
-defineExpose({ pick });
+onMounted(() => {
+  setTimeout(() => {
+    checkValue();
+  }, 200);
+});
 </script>

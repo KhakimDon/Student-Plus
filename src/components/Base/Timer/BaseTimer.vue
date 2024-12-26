@@ -1,35 +1,34 @@
 <template>
   <div class="flex items-center justify-center space-x-2">
-    <span class="text-gray-700 text-sm font-normal leading-130">
-      {{ $t("can_resend_time") }}
-    </span>
     <span
       v-if="defaultSeconds > 0"
-      class="text-blue text-sm font-medium leading-130"
       :class="{ '!text-red': colorTrigger }"
+      class="text-blue text-sm font-medium leading-130"
     >
       {{ time }}
     </span>
     <button
       v-else
-      class="icon-rotate text-xl leading-5 text-blue-primary hover:rotate-[360deg] transition-all duration-200"
+      class="icon-refresh leading-5 text-blue hover:rotate-360 transition-300"
       @click="$emit('resend')"
     />
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref, watch } from "vue";
 
 interface Props {
   seconds: number;
   messageType?: "sms" | "call";
 }
+
 const props = defineProps<Props>();
 
 interface Emits {
   (e: "resend"): void;
 }
+
 const $emit = defineEmits<Emits>();
 const defaultSeconds = ref(0);
 const time = ref("");

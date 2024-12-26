@@ -1,38 +1,36 @@
-import { createI18n } from "vue-i18n";
+import {createI18n} from "vue-i18n";
 
-import { customRule, customRuRule } from "@/languages/customRules";
-import ru from "@/languages/ru.json";
-import sr from "@/languages/sr.json";
-import uz from "@/languages/uz.json";
+import {customRule, customRuRule,} from "@/locales/customRules";
+import {getCookie, setCookie} from "@/utils/browser";
 
-let locale = localStorage.getItem("locale") as string;
+import en from "@/locales/en.json";
+import ru from "@/locales/ru.json";
+import uz from "@/locales/uz.json";
+
+let locale = getCookie("locale");
 if (!locale) {
-  locale = "ru";
-  localStorage.setItem("locale", "ru");
+    setCookie("locale", "ru");
+    locale = "ru";
 }
 
 const i18n = createI18n({
-  legacy: false,
-  globalInjection: true,
-  missingWarn: false,
-  fallbackWarn: false,
-  messages: {
-    ru,
-    uz,
-    sr,
-  },
-  locale,
-  pluralRules: {
-    uz: customRule,
-    sr: customRule,
-    ru: customRuRule,
-  },
-  runtimeOnly: false,
+    legacy: false,
+    globalInjection: true,
+    missingWarn: false,
+    fallbackWarn: false,
+    fallbackLocale: "ru",
+    messages: {
+        en,
+        ru,
+        uz,
+    },
+    locale,
+    pluralRules: {
+        ru: customRuRule,
+        en: customRule,
+        uz: customRule,
+    },
+    runtimeOnly: false,
 });
-
-// export const setMessages = async () => {
-//   const messages = await messagesFetcher(locale);
-//   i18n.global.setLocaleMessage("ru", ru);
-// };
 
 export default i18n;

@@ -1,9 +1,9 @@
 <template>
-  <div class="code-input" :class="error ? 'error' : ''">
+  <div :class="error ? 'error' : ''" class="code-input">
     <label
       v-if="label"
-      class="mb-2 block text-sm leading-130 font-medium text-dark"
       :for="`verification-input-${randomNumber}`"
+      class="mb-2 block text-sm leading-130 font-medium text-gray-1"
     >
       {{ label }}
     </label>
@@ -17,20 +17,20 @@
                 if (el) inputs[index + 1] = el;
               }
             "
-            class="w-full text-center outline-none transition-300 h-16 font-medium text-2xl text-gray-100 leading-140 overflow-hidden !rounded-md bg-[#F3F6F9] border border-transparent focus:border-blue-primary focus:bg-white"
-            :class="inputClass"
-            pattern="[0-9]"
             :autoFocus="autoFocus && index === autoFocusIndex"
+            :class="inputClass"
             :data-id="index"
-            :value="v"
-            :required="props.required"
             :disabled="props.disabled"
+            :required="props.required"
+            :value="v"
+            class="w-full text-center bg-white-1 outline-none transition-300 size-14 font-medium text-2xl text-dark leading-140 overflow-hidden !rounded-md border caret-blue border-[#94A8AA66] focus:border-blue focus:bg-white"
             maxlength="1"
-            @input="onValueChange"
+            pattern="[0-9]"
+            @blur="activeIndex = null"
             @focus="onFocus($event, index)"
+            @input="onValueChange"
             @keydown="onKeyDown"
             @paste="pasteDigits"
-            @blur="activeIndex = null"
           />
         </div>
       </template>

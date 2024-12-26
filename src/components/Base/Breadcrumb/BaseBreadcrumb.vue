@@ -1,35 +1,53 @@
 <template>
-  <div class="flex items-center text-black">
-    <div
-      v-for="(route, index) in breadcrumbRoutes"
-      :key="index"
-      class="flex items-center text-13 text-dark-black font-medium hover:text-yellow-dark last:text-gray-1 last:pointer-events-none"
-    >
-      <div v-if="route.loading" class="shimmer w-40 h-4 rounded shrink-0"></div>
-      <p v-else-if="index === breadcrumbRoutes.length - 1" class="w-max">
-        {{ route.name }}
-      </p>
-      <RouterLink
-        v-else
-        :to="route.route || ''"
-        class="transition duration-500 w-max"
-      >
-        {{ route.name }}
-      </RouterLink>
-      <span
-        v-if="index !== breadcrumbRoutes.length - 1"
-        class="mx-2 w-1 h-1 bg-yellow rounded-full"
-      />
-    </div>
-  </div>
+  <nav :class="$attrs.class" aria-label="breadcrumb">
+    <BreadcrumbList>
+      <BreadcrumbItem class="text-dark font-medium">
+        <BreadcrumbLink :to="{ name: 'Dashboard' }">
+          {{ $t('breadcrumb.home') }}
+        </BreadcrumbLink>
+      </BreadcrumbItem>
+
+      <BreadcrumbSeparator/>
+
+      <BreadcrumbItem v-if="routes.length - 1 > 2">
+        <DropdownMenu>
+          <DropdownMenuTrigger class="flex-y-center gap-1">
+            <i class="icon-dots text-lg text-gray-1"/>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start">
+            <DropdownMenuItem v-for="(item, key) in routes.slice(0, routes.length - 1)" :key class="cursor-pointer">
+              <BreadcrumbLink :to="item.route">
+                {{ item.name }}
+              </BreadcrumbLink>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <BreadcrumbSeparator/>
+      </BreadcrumbItem>
+
+      <template v-else>
+        <BreadcrumbItem v-for="(item, key) in routes" :key>
+          <BreadcrumbLink :to="item.route">
+            {{ item.name }}
+          </BreadcrumbLink>
+          <BreadcrumbSeparator/>
+        </BreadcrumbItem>
+      </template>
+
+      <BreadcrumbItem class="text-gray-1">
+        {{ lastRoute.name }}
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </nav>
 </template>
 
 <script lang="ts" setup>
-import { IRoute } from "./BaseBreadcrumb.types";
+import {BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator,} from '@/components/ui/breadcrumb'
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from '@/components/ui/dropdown-menu'
+import type {BreadcrumbProps} from "@/types/components";
+import {computed} from "vue";
 
-export interface Props {
-  breadcrumbRoutes: IRoute[];
-}
+const props = defineProps<BreadcrumbProps>()
 
-defineProps<Props>();
+const lastRoute = computed(() => props.routes[props.routes.length - 1])
 </script>

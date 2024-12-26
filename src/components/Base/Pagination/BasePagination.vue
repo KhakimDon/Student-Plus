@@ -1,6 +1,7 @@
 <template>
-  <div class="flex-center-between w-full gap-5">
+  <div class="flex-center-between w-full gap-5 !justify-end">
     <BasePaginationSize v-if="total > limit" v-model="limit" />
+
     <ul v-if="items.length > 1" class="pagination flex-y-center gap-2">
       <li
         class="group cursor-pointer"
@@ -124,9 +125,11 @@ function prev() {
     page.value = page.value - 1;
   }
 }
+
 function goto(newPage: number) {
   page.value = newPage;
 }
+
 function next() {
   if (!hasLast.value) {
     page.value++;
@@ -145,6 +148,6 @@ defineExpose({
 });
 
 const buttonClass =
-  "rounded-md min-w-7 px-1 min-h-7 flex-center transition-300 hover:!bg-[#dfe1e8] text-sm leading-4 text-[#9096A7]";
-const buttonActiveClass = "!bg-[#F7E869] !text-[#1F1F24]";
+  "rounded-md min-w-7 px-1 min-h-7 flex-center transition-300 hover:!bg-primary text-sm leading-4 text-gray-1 hover:!text-white";
+const buttonActiveClass = "!bg-primary !text-white";
 </script>

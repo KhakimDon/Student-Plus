@@ -4,7 +4,7 @@
     <p
       v-if="title"
       :class="titleClass"
-      class="text-xl leading-130 font-medium text-dark-800 text-center md:max-w-[80%] mx-auto mt-5"
+      class="text-xl leading-130 font-medium text-dark-800 text-center mx-auto mt-5"
     >
       {{ title }}
     </p>
@@ -31,7 +31,7 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  image: "/images/no-data/box.svg",
+  image: "/images/no-data.svg",
   title: "",
 });
 </script>

@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col gap-2 w-full">
-    <div class="flex-center-between w-full" :class="labelWrapperClass">
+    <div :class="labelWrapperClass" class="flex-center-between w-full">
       <FormLabel
-        :label="label"
+        :label="$t(label)"
         :label-class="labelClass"
         v-bind="{ forText, required }"
       />

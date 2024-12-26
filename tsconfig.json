@@ -1,43 +1,11 @@
 {
-  "compilerOptions": {
-    "removeComments": true,
-    "forceConsistentCasingInFileNames": true,
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "strictBindCallApply": true,
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "isolatedModules": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "baseUrl": "./",
-    "types": [
-      "vite/client",
-      "@intlify/vite-plugin-vue-i18n/client"
-    ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
-  },
-  "include": [
-    "vite.config.*",
-    "src/**/*",
-    "src/**/*.vue"
+    {
+      "path": "./tsconfig.app.json"
+    }
   ],
-  "exclude": [
-    "node_modules",
-    "**/*.stories.ts"
-  ]
 }

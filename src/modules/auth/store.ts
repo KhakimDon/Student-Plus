@@ -1,10 +1,8 @@
 import { defineStore } from "pinia";
 
 import { useApi } from "@/composables/useApi";
-import router from "@/router";
-import { IAuthTokens, IAuthUser } from "@/types/auth";
-import { IFetchOptions } from "@/types/common";
-import { ACCESS_ACTION, ACCESS_NAME } from "@/types/permission";
+import type { IAuthTokens, IAuthUser } from "@/types/auth";
+import type { IFetchOptions } from "@/types/common";
 
 // import { $ResetPinia } from "@/utils/functions/common";
 
@@ -15,9 +13,7 @@ interface IState {
   };
   user?: IAuthUser;
   preloader: boolean;
-  accessPolices?: Record<ACCESS_NAME, ACCESS_ACTION[] | undefined>;
   oneId?: string | null;
-  blockedTime: number;
 }
 
 export const useAuthStore = defineStore("auth", {
@@ -25,9 +21,7 @@ export const useAuthStore = defineStore("auth", {
     tokens: {},
     user: undefined,
     preloader: false,
-    accessPolices: undefined,
     oneId: null,
-    blockedTime: 0,
   }),
   getters: {
     isAuthenticated: (state) =>
@@ -46,7 +40,7 @@ export const useAuthStore = defineStore("auth", {
     refreshToken() {
       return new Promise((resolve, reject) => {
         useApi()
-          .$post<Pick<IAuthTokens, "access">>("/auth/TokenRefresh/", {
+          .$post<Pick<IAuthTokens, "access">>("/auth/token/refresh/", {
             refresh: this.getTokens?.refresh,
           })
           .then((data) => {
@@ -63,7 +57,7 @@ export const useAuthStore = defineStore("auth", {
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
 
-      // return router.push({ name: "AuthLogin" });
+      // return router.push({ name: "Tests" });
     },
     setTokens(tokens: Partial<IAuthTokens>) {
       if (tokens?.access) {
@@ -82,7 +76,7 @@ export const useAuthStore = defineStore("auth", {
           return;
         }
         useApi()
-          .$get<IAuthUser>("/users/GetProfile/")
+          .$get<IAuthUser>("/auth/profile/")
           .then((data) => {
             this.user = data;
             resolve(data);
@@ -92,19 +86,22 @@ export const useAuthStore = defineStore("auth", {
           });
       });
     },
-    login(data: { username: string; password: string }) {
-      return new Promise((resolve, reject) => {
+    fetchOneId() {
+      return new Promise<string>((resolve, reject) => {
         useApi()
-          .$post("/auth/login/", data)
+          .$get<{ one_id_url: string }>("/auth/oneid/")
           .then((data) => {
-            this.setTokens(data);
-            this.getProfile();
-            resolve(data);
+            this.oneId = data.one_id_url;
+            resolve(this.oneId);
           })
           .catch((err) => {
             reject(err);
           });
       });
+    },
+    hasAccessToken() {
+      const authToken = localStorage.getItem("access_token");
+      return !!authToken; // Convert the value to a boolean
     },
   },
 });

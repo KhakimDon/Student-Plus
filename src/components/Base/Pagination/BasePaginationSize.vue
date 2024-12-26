@@ -1,8 +1,9 @@
 <template>
   <div class="flex items-center gap-2">
     <p class="text-xs leading-5 font-medium text-dark">
-      {{ $t("review_business_show") }}
+      {{ $t("form.pagination.show") }}
     </p>
+
     <FormSelect
       v-model="value"
       :disabled="disabled"
@@ -10,7 +11,7 @@
       direction="bottom"
       value-key="value"
       label-key="value"
-      selected-option-styles="!px-3 !py-1 bg-gray-3 border-none"
+      selected-option-styles="!px-3 !py-1 bg-white-1 border-none"
       v-bind="{ options }"
     />
   </div>
@@ -47,6 +48,9 @@ const options = [
   },
   {
     value: 100,
+  },
+  {
+    value: 500,
   },
 ];
 </script>

@@ -1,36 +1,64 @@
 <template>
-  <div class="bg-white rounded-xl p-5 mb-6 flex">
-    <FilterDateRange />
-  </div>
-  <div class="relative">
-    <div class="grid grid-cols-4 gap-5 relative mb-5">
-      <DashboardAttendanceChart class="col-span-2 row-span-2" />
-      <DashboardVerificationChart class="row-span-2" />
-      <DashboardMembersChart class="row-span-2" />
-    </div>
-    <div class="grid grid-cols-2 gap-5 relative">
-      <div>
-        <DashboardStockOrder />
-      </div>
+  <main>
+    <Teleport v-if="mounted" to="#header-breadcrumbs">
+      <BaseBreadcrumb v-bind="{ routes}"/>
+    </Teleport>
 
-      <DashboardOperationsChart />
-    </div>
-    <teleport v-if="mounted" to="#header-breadcrumbs">
-      <BaseBreadcrumb :breadcrumb-routes="[{ name: $t('dashboard') }]" />
-    </teleport>
-  </div>
+    <h1>Dashboard</h1>
+    <BaseTab v-model="currentTab" :list="list"/>
+
+    <ExampleDropdown/>
+    <ExampleModal/>
+
+    <BaseTooltip text="hello,  this is the example of tooltip">
+      <p>show tooltip</p>
+    </BaseTooltip>
+  </main>
 </template>
-
 <script lang="ts" setup>
-import { useMounted } from "@vueuse/core";
+import {BaseBreadcrumb, BaseTab, BaseTooltip} from "@/components/Base";
+import {ref} from "vue";
+import {useMounted} from "@vueuse/core";
+import type {IRoute} from "@/types/components";
+import ExampleDropdown from "@/modules/dashboard/components/ExampleDropdown.vue";
+import ExampleModal from "@/modules/dashboard/components/ExampleModal.vue";
 
-import { BaseBreadcrumb } from "@/components/Base";
-import FilterDateRange from "@/components/Base/Form/DatePicker/FilterDateRange.vue";
-import DashboardAttendanceChart from "@/modules/dashboard/components/Charts/DashboardAttendanceChart.vue";
-import DashboardMembersChart from "@/modules/dashboard/components/Charts/DashboardMembersChart.vue";
-import DashboardOperationsChart from "@/modules/dashboard/components/Charts/DashboardOperationsChart.vue";
-import DashboardStockOrder from "@/modules/dashboard/components/Charts/DashboardStockOrder.vue";
-import DashboardVerificationChart from "@/modules/dashboard/components/Charts/DashboardVerificationChart.vue";
+const mounted = useMounted()
 
-const mounted = useMounted();
+const currentTab = ref('tab-1');
+
+const list = [
+  {
+    value: 'tab-1',
+    label: 'Tab 1',
+  },
+  {
+    value: 'tab-2',
+    label: 'Tab 2',
+  },
+  {
+    value: 'tab-3',
+    label: 'Tab 3',
+  }
+]
+
+const routes: IRoute[] = [
+  {
+    name: 'home 2',
+    route: {name: 'Dashboard'}
+  },
+  {
+    name: 'some other route',
+    route: {name: 'Dashboard'}
+  },
+  {
+    name: 'other route',
+    route: {name: 'Dashboard'}
+  },
+  {
+    name: 'Route other 1',
+    route: {name: 'Dashboard'}
+  }
+]
+
 </script>

@@ -2,7 +2,7 @@
   <label
     :class="labelClass"
     :for="forText"
-    class="text-sm font-medium leading-normal text-gray-0"
+    class="text-sm leading-normal text-gray-1"
   >
     {{ label }} <span v-if="required">*</span>
   </label>

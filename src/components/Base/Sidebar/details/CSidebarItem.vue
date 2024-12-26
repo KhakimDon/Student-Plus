@@ -7,13 +7,13 @@
         <div class="flex items-center gap-2">
           <div
             v-if="item.svgIconTag"
-            class="icon-svg"
             :class="{ active: active || isActive }"
+            class="icon-svg"
             v-html="item.svgIconTag"
           />
           <i
             v-else
-            :class="[item.svgIcon, { '!text-yellow': active || isActive }]"
+            :class="[item.svgIcon, { '!text-blue': active || isActive }]"
             class="text-xl leading-5 transition-300 delay-300 text-gray-1"
           />
           <p
@@ -27,8 +27,8 @@
 
       <i
         v-if="item.sub?.length && !miniMenu"
-        :class="{ '!rotate-90 !text-yellow': active || isActive }"
-        class="icon-chevron -rotate-90 text-xl leading-5 transition-300 text-gray-1"
+        :class="{ '!-rotate-90 !text-blue': active || isActive }"
+        class="icon-chevron rotate-90 text-xl leading-5 transition-300 text-gray-1"
       />
     </div>
 
@@ -36,12 +36,12 @@
       <div v-if="active" class="flex flex-col gap-2 pb-3">
         <CSidebarSubItem
           v-for="(subItem, subIndex) in item.sub"
+          :key="subIndex"
           v-bind="{
             subItem,
             miniMenu,
             active: route.name?.toString().startsWith(subItem.route.name),
           }"
-          :key="subIndex"
           @click="$emit('click-to-child')"
         />
       </div>
@@ -49,7 +49,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import CollapseTransition from "@ivanv/vue-collapse-transition/src/CollapseTransition.vue";
 import { useRoute } from "vue-router";
 
@@ -62,6 +62,7 @@ interface Props {
   isActive?: boolean;
   miniMenu?: boolean;
 }
+
 defineProps<Props>();
 
 defineEmits<{
@@ -76,6 +77,7 @@ const route = useRoute();
   width: 24px;
   height: 24px;
 }
+
 .icon-svg.active svg path,
 .icon-svg.active svg circle {
   stroke: white;

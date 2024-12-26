@@ -1,28 +1,34 @@
 <template>
   <div
-    class="border py-2 px-3 rounded-md border-dashed border-gray-2 group flex-y-center gap-2.5"
+    class="border py-2 px-3 rounded-md border-dashed border-gray-4 group flex-y-center gap-2.5 min-h-14"
   >
     <i v-if="iconClass" :class="iconClass" />
-    <div class="flex flex-col">
+    <div class="flex-between flex-col gap-1">
       <slot>
-        <p
-          :class="[activeClass, titleClass]"
-          class="text-sm font-bold text-black leading-130 transition-300 block line-clamp-1"
-        >
-          {{ title }}
-        </p>
+        <div class="flex-y-center h-[18px]">
+          <slot name="prefix" />
+          <a
+            :class="[activeClass, titleClass]"
+            :href="actionValue"
+            class="text-sm font-bold text-black leading-130 transition-300 block"
+          >
+            {{ title }}
+          </a>
+          <slot name="suffix" />
+        </div>
       </slot>
+
       <p
-        class="text-gray-1 text-xs leading-130 font-medium"
         :class="descriptionClass"
+        class="text-gray-1 text-xs leading-130 font-medium"
       >
-        {{ t(description ?? "") }}
+        {{ noTranslation ? description : t(description) }}
       </p>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 
@@ -34,6 +40,7 @@ interface Props {
   iconClass?: string;
   actionValue?: string;
   titleClass?: string;
+  noTranslation?: boolean;
 }
 
 const { t } = useI18n();
