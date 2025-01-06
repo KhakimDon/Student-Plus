@@ -76,4 +76,8 @@
     .separator {
         @apply h-px bg-white-1 my-1
     }
+
+    .status {
+        @apply px-2 py-1 rounded-md
+    }
 }

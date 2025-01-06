@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import FormInput from "@/components/Base/Form/Input/FormInput.vue";
-import {InputProps} from "@/types/components";
+import type {InputProps} from "@/types/components";
 
 defineProps<InputProps>();
 const value = defineModel<string>({

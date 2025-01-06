@@ -13,16 +13,32 @@
     <BaseTooltip text="hello,  this is the example of tooltip">
       <p>show tooltip</p>
     </BaseTooltip>
+
+    <BasePagination :default-page="1" :sibling-count="2" :total="10230" show-edges/>
+
+    <pre class="mt-10"> use <code class="status">separator</code> with just class </pre>
+
+    <div class="separator mb-5"/>
+
+    <BaseButton text="Open toast" @click="openToast"/>
   </main>
 </template>
+
 <script lang="ts" setup>
-import {BaseBreadcrumb, BaseTab, BaseTooltip} from "@/components/Base";
-import {ref} from "vue";
+import {BaseBreadcrumb, BaseButton, BasePagination, BaseTab, BaseTooltip} from "@/components/Base";
+import {defineAsyncComponent, ref} from "vue";
 import {useMounted} from "@vueuse/core";
 import type {IRoute} from "@/types/components";
-import ExampleDropdown from "@/modules/dashboard/components/ExampleDropdown.vue";
-import ExampleModal from "@/modules/dashboard/components/ExampleModal.vue";
+import {useCustomToast} from "@/composables/useCustomToast";
 
+const ExampleDropdown = defineAsyncComponent(() =>
+    import("@/modules/dashboard/components/ExampleDropdown.vue")
+);
+const ExampleModal = defineAsyncComponent(() =>
+    import("@/modules/dashboard/components/ExampleModal.vue")
+);
+
+const {showToast} = useCustomToast()
 const mounted = useMounted()
 
 const currentTab = ref('tab-1');
@@ -61,4 +77,7 @@ const routes: IRoute[] = [
   }
 ]
 
+const openToast = () => {
+  showToast('helooo', 'success')
+}
 </script>

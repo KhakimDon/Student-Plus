@@ -30,7 +30,7 @@ export {default as FormSearchInput} from "@/components/Base/Form/Input/SearchInp
 export {default as FormLabel} from "@/components/Base/Form/Label/FormLabel.vue";
 export {default as FormRadio} from "@/components/Base/Form/Radio/FormRadio.vue";
 export {default as FormRadioGroup} from "@/components/Base/Form/Radio/FormRadioGroup.vue";
-export {default as FormSelect} from "@/components/Base/Form/Select/Select.vue";
+export {default as FormSelect} from "@/components/Base/Form/Select/FormSelect.vue";
 export {default as FormTextarea} from "@/components/Base/Form/Textarea/Textarea.vue";
 export {default as FormToggle} from "@/components/Base/Form/Toggle/FormToggle.vue";
 export {default as BaseImageUploader} from "@/components/Base/Form/Uploader/BaseImageUploader.vue";
@@ -74,3 +74,6 @@ export {default as BaseTooltip} from "@/components/Base/Tooltip/BaseTooltip.vue"
 
 //* --\*_*/-- Spinner Components
 export {default as BaseSpinner} from "@/components/Base/Loader/BaseSpinner.vue";
+
+//* --\*_*/-- Toast Components
+export {default as BaseToast} from "@/components/Base/Toast/Toast.vue";

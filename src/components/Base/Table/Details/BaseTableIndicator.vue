@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {TableStatusIndicator} from "@/types/components";
+import type {TableStatusIndicator} from "@/types/components";
 
 interface Props {
   colors: TableStatusIndicator["colors"];

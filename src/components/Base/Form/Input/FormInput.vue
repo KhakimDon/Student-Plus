@@ -43,7 +43,7 @@
 <script lang="ts" setup>
 import {ref} from "vue";
 
-import {InputProps} from "@/types/components";
+import type {InputProps} from "@/types/components";
 
 defineProps<InputProps>();
 

@@ -34,7 +34,7 @@ import {CONFIG} from "@/config";
 
 <style scoped>
 .bg-image {
-  //background-image: url("/images/auth/banner.avif");
+  /* background-image: url("/images/auth/banner.avif"); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
