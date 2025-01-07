@@ -78,6 +78,6 @@ const routes: IRoute[] = [
 ]
 
 const openToast = () => {
-  showToast('helooo', 'success')
+  showToast('helooo', 'error')
 }
 </script>

@@ -4,6 +4,7 @@
       <Component :is="Component"/>
     </component>
   </RouterView>
+  <Toaster v-bind="TOAST_CONFIG"/>
 </template>
 
 <script lang="ts" setup>
@@ -13,6 +14,8 @@ import {useRoute} from "vue-router";
 import LAuth from "@/layout/LAuth.vue";
 import LDefault from "@/layout/LDefault.vue";
 import LEmpty from "@/layout/LEmpty.vue";
+import {Toaster} from "vue-sonner";
+import {TOAST_CONFIG} from "@/config";
 
 const LError = () => import("@/layout/LError.vue");
 const LMobile = () => import("@/layout/LMobile.vue");

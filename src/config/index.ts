@@ -1,4 +1,4 @@
-import type {PluginOptions} from "vue-toastification";
+import type {ToasterProps} from "vue-sonner";
 
 export const CONFIG = {
     COMMON_URL: `${import.meta.env.VITE_APP_BASE_URL}/common/api/v1`,
@@ -7,17 +7,7 @@ export const CONFIG = {
 };
 
 export const TOAST_CONFIG = {
-    position: "top-right" as PluginOptions['position'],
-    timeout: 5000,
-    closeOnClick: true,
-    pauseOnFocusLoss: true,
-    pauseOnHover: true,
-    draggable: true,
-    draggablePercent: 0.6,
-    showCloseButtonOnHover: false,
-    hideProgressBar: true,
-    closeButton: "button",
-    icon: true,
-    rtl: false,
-    maxToasts: 5,
-} as PluginOptions
+    duration: 5000,
+    position: "top-right",
+    visibleToasts: 5,
+} as ToasterProps
