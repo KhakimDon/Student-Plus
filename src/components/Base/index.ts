@@ -76,4 +76,4 @@ export {default as BaseTooltip} from "@/components/Base/Tooltip/BaseTooltip.vue"
 export {default as BaseSpinner} from "@/components/Base/Loader/BaseSpinner.vue";
 
 //* --\*_*/-- Toast Components
-export {default as BaseToast} from "@/components/Base/Toast/Toast.vue";
+export {default as BaseToast} from "@/components/Base/Toast/BaseToast.vue";
