@@ -54,7 +54,7 @@ const remainingCount = computed(() => {
 const transformedList = computed(() =>
   props.list.map((item) =>
     typeof item === "object" && item !== null
-      ? (item as Record<string, any>)[props.labelKey] ?? ""
+      ? (item as Record<string, object>)[props.labelKey] ?? ""
       : item
   )
 );

@@ -182,12 +182,13 @@ initVals();
 watch(
   () => props.step,
   (newValue) => {
-    if (newValue === 2) {
-      document.getElementById(`verification-input-${randomNumber}`).autofocus;
+    if (newValue === 2 && inputs.value[1]) {
+      inputs.value[1].focus();
     }
   },
   { immediate: true }
 );
+
 onBeforeUpdate(() => {
   inputs.value = [];
 });
@@ -201,7 +202,6 @@ onMounted(() => {
     }, 500);
   });
 });
-
 const pasteDigits = (e) => {
   e.preventDefault();
   const pastedData = e.clipboardData.getData("text");

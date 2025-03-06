@@ -41,7 +41,8 @@ export const useApi = (apiUrl?: string) => {
                             ...error.config,
                             headers: getHeaders(),
                         });
-                    } catch (err) {
+                    } catch (err: object) {
+                        console.error(err);
                         authStore.logout();
                         return Promise.reject(error);
                     }
@@ -61,7 +62,7 @@ export const useApi = (apiUrl?: string) => {
             loading.value = true;
             $service(options)
                 .get(endpoint)
-                .then((response: T | any) => {
+                .then((response: T | object) => {
                     resolve(response.data);
                 })
                 .catch((error) => {
@@ -73,7 +74,7 @@ export const useApi = (apiUrl?: string) => {
         });
     }
 
-    function $post<T = never, D = Record<string, any> | FormData>(
+    function $post<T = never, D = Record<string, object> | FormData>(
         endpoint: string,
         data?: D,
         options?: AxiosRequestConfig,
@@ -82,7 +83,7 @@ export const useApi = (apiUrl?: string) => {
         return new Promise((resolve, reject) => {
             $service(axiosOptions)
                 .post(endpoint, data, options)
-                .then((response: T | any) => {
+                .then((response: T | object) => {
                     resolve(response.data);
                 })
                 .catch((error) => reject(error.response))
@@ -92,7 +93,7 @@ export const useApi = (apiUrl?: string) => {
         });
     }
 
-    function $put<T = never, D = Record<string, any> | FormData>(
+    function $put<T = never, D = Record<string, object> | FormData>(
         endpoint: string,
         data?: D,
         options?: AxiosRequestConfig,
@@ -101,7 +102,7 @@ export const useApi = (apiUrl?: string) => {
         return new Promise((resolve, reject) => {
             $service(axiosOptions)
                 .put(endpoint, data, options)
-                .then((response: T | any) => {
+                .then((response: T | object) => {
                     resolve(response.data);
                 })
                 .catch((error) => reject(error.response))
@@ -111,7 +112,7 @@ export const useApi = (apiUrl?: string) => {
         });
     }
 
-    function $patch<T = never, D = Record<string, any> | FormData>(
+    function $patch<T = never, D = Record<string, object> | FormData>(
         endpoint: string,
         data?: D,
         options?: AxiosRequestConfig,
@@ -120,7 +121,7 @@ export const useApi = (apiUrl?: string) => {
         return new Promise((resolve, reject) => {
             $service(axiosOptions)
                 .patch(endpoint, data, options)
-                .then((response: T | any) => {
+                .then((response: T | object) => {
                     resolve(response.data);
                 })
                 .catch((error) => reject(error.response))
@@ -138,7 +139,7 @@ export const useApi = (apiUrl?: string) => {
         return new Promise((resolve, reject) => {
             $service(axiosOptions)
                 .delete(endpoint, options)
-                .then((response: T | any) => {
+                .then((response: T | object) => {
                     resolve(response.data);
                 })
                 .catch((error) => reject(error.response))

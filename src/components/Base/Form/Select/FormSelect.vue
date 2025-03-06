@@ -105,7 +105,7 @@ interface Props {
   hasPrefix?: boolean;
 }
 
-type IndexedTSelectOption = Extract<TSelectOption, Record<string, any>>;
+type IndexedTSelectOption = Extract<TSelectOption, Record<string, object>>;
 
 const props = withDefaults(defineProps<Props>(), {
   labelKey: "name",
