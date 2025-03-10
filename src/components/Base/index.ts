@@ -21,8 +21,8 @@ export {default as StackChart} from "@/components/Base/Chart/StackChart.vue";
 export {default as BaseDropdown} from "@/components/Base/Dropdown/BaseDropdown.vue";
 
 //* --\*_*/-- Form Components
-export {default as FormCheckbox} from "@/components/Base/Form/Checkbox/Checkbox.vue";
-export {default as FormEditor} from "@/components/Base/Form/Editor.vue";
+export {default as FormCheckbox} from "@/components/Base/Form/Checkbox/FormCheckbox.vue";
+export {default as FormEditor} from "@/components/Base/Form/FormEditor.vue";
 export {default as FormGroup} from "@/components/Base/Form/FormGroup.vue";
 export {default as FormOtp} from "@/components/Base/Form/FormOtp.vue";
 export {default as FormInput} from "@/components/Base/Form/Input/FormInput.vue";
