@@ -21,7 +21,7 @@
         :class="[
           modelValue === value ? activeStyles : labelStyles || 'text-gray-700',
         ]"
-        class="font-normal text-sm leading-130 transition-300"
+        class="font-normal ml-2 text-sm leading-130 transition-300"
       >
         {{ label }}
       </span>
@@ -49,7 +49,8 @@ const props = withDefaults(defineProps<Props>(), {
   size: 16,
   activeClass: "text-blue",
   labelStyles: "",
-  btnStyles: " group-hover:border-blue-primary peer-checked:border-primary",
+  btnStyles:
+    " group-hover:border-blue-primary peer-checked:border-primary peer-checked:border-[4px]",
 });
 
 const emit = defineEmits<{

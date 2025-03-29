@@ -43,3 +43,27 @@
 .Vue-Toastification__icon {
   display: none !important;
 }
+
+
+
+.fade-enter-active {
+  animation: fade 0.3s ease-in-out;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes enter-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
