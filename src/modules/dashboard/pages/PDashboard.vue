@@ -23,7 +23,7 @@
         </FormGroup>
         <FormGroup label="Aloqa telefon raqamingiz">
           <FormInput
-            placeholder="Tefeon raqamingini kiriting"
+            placeholder="Telefon raqamingizni kiriting"
             v-model="form.values.phone"
           />
         </FormGroup>
@@ -58,7 +58,7 @@
         </FormGroup>
 
         <FormGroup
-          label="Qaysi mutaxassislik (yo‘nalish) bo‘yicha tahsil olmoqchisiz"
+          label="Qaysi mutaxassislik (yo‘nalish) bo‘yicha tahsil olmoqchisiz?"
         >
           <FormInput
             placeholder="Yo‘nalishni kiriting"
@@ -86,7 +86,7 @@
           />
         </FormGroup>
         <FormGroup
-          label="Rossiyadagi qaysi shaharda tahsil olishni rejalashtiryapsiz"
+          label="Rossiyadagi qaysi shaharda tahsil olishni rejalashtiryapsiz?"
         >
           <FormInput
             placeholder="Shahar nomini kiriting"
@@ -127,7 +127,7 @@
             class="mt-2"
           />
         </FormGroup>
-        <FormGroup label="Rus tilini qanchalik bilasiz">
+        <FormGroup label="Rus tilini bilish darajangiz qanday?">
           <FormRadioGroup
             v-model="form.values.level"
             :items="level_values"
@@ -144,14 +144,14 @@
         />
       </div>
       <div v-else-if="step == 5" class="mt-3">
-        <FormGroup label=" Ilgari Rossiyada bo‘lganmisiz">
+        <FormGroup label=" Ilgari Rossiyada bo‘lganmisiz?">
           <FormRadioGroup
             v-model="form.values.be_here"
             :items="confirmation"
             class="mt-2"
           />
         </FormGroup>
-        <FormGroup label="Sizga Rossiyada yashash uchun yotoqxona kerakmi">
+        <FormGroup label="Sizga Rossiyada yashash uchun yotoqxona kerakmi?">
           <FormRadioGroup
             v-model="form.values.need_home"
             :items="confirmation"
@@ -159,7 +159,7 @@
           />
         </FormGroup>
         <FormGroup
-          label="Rossiyada qarindoshlaringiz yoki yaqin insonlaringiz bormi"
+          label="Rossiyada qarindoshlaringiz yoki yaqin insonlaringiz bormi?"
         >
           <FormRadioGroup
             v-model="form.values.has_natives"
