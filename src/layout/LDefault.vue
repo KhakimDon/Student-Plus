@@ -4,7 +4,9 @@
     <div
       class="card-wrapper w-full min-h-screen grid grid-rows-[min-content_1fr]"
     >
-      <div class="h-screen flex-center flex-col w-full overflow-y-auto">
+      <div
+        class="h-screen card-wrapper-item flex-center flex-col w-full overflow-y-auto"
+      >
         <div class="font-[500] text-lg text-white w-[90%]">
           <div class="bg-grad mx-auto w-max px-3 py-1 rounded-t-[10px]">
             So'rovnoma

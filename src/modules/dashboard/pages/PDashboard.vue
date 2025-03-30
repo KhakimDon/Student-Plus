@@ -47,7 +47,6 @@
           <FormInput
             placeholder="Yilni kiriting"
             v-model="form.values.university_end"
-            type="number"
             v-maska="'####'"
           />
           <FormRadioGroup

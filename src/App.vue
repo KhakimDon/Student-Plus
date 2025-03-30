@@ -30,15 +30,20 @@ if (window?.visualViewport) {
 
 import { onMounted, onBeforeUnmount } from "vue";
 
-const handleFocus = (event: Event) => {
-  const input = event.target as HTMLInputElement;
-  setTimeout(() => {
-    input.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, 300);
+const handleFocus = () => {
+  document.querySelector(".card-wrapper-item").classList.add("fff");
+  document.querySelector(".card-wrapper-item").style.teransform =
+    "translateY(-100px)";
+};
+const handleFocusOut = () => {
+  document.querySelector(".card-wrapper-item").classList.remove("fff");
+  document.querySelector(".card-wrapper-item").style.teransform =
+    "translateY(-100px)";
 };
 
 onMounted(() => {
   document.addEventListener("focusin", handleFocus);
+  document.addEventListener("focusout", handleFocusOut);
 });
 
 onBeforeUnmount(() => {
@@ -76,5 +81,8 @@ const detectLayout = computed(() => {
   100% {
     width: 100vw;
   }
+}
+.fff {
+  transform: translateY(-150px);
 }
 </style>
