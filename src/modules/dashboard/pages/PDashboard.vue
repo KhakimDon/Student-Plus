@@ -1,7 +1,7 @@
 <template>
   <main>
     <h1 v-if="step !== 6" class="text-center font-[800]">
-      Rossiya universitetlariga o'qishga kirish uchun anketa 📑
+      Qaysi universitet siz uchun mos!
     </h1>
     <div class="mx-auto w-max mt-4">
       <BaseStepper v-if="step !== 6" :current-step="step" :steps="steps" />
@@ -194,16 +194,20 @@
           <i class="icon-check"></i>
         </div>
         <h1 class="font-[600]">
-          Ariza Yuborildi <br />
-          <span class="text-sm font-[500]"
-            >Tabriklaymiz siz Universitetga kirishga birinchi qadam qo'ydingiz
-            !</span
-          >
+          📨 So‘rovnomangiz qabul qilindi <br />
+          <span class="text-xs font-[500]">
+            Bizga murojaat qilganingiz uchun minnatdorchilik bildiramiz.
+            Ma’lumotlaringiz ko‘rib chiqiladi va
+            <span class="font-[700]"
+              >mas’ul xodimlarimiz tez orada siz bilan bog‘lanishadi.</span
+            >
+          </span>
         </h1>
         <p
           class="mt-4 text-primary font-[500] text-sm border-t border-primary pt-4"
         >
-          Xodimlarimiz siz bilan 24 soat ichida bo'g'lanishadi.
+          ⚠️ Agar 24 soat ichida javob olmasangiz, iltimos, qayta murojaat
+          qiling.
         </p>
         <SalutAnim />
       </div>
@@ -226,7 +230,6 @@ import {
 import { vMaska } from "maska/vue";
 import { db } from "@/config/firebase";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import dayjs from "dayjs";
 
 const steps = [
   { title: "" },
@@ -381,21 +384,21 @@ const submit = () => {
         const TOKEN = "7851159577:AAH2AL7CdV7gfP9F2ArmwooIVfgDiHeBwf4";
         const CHAT_ID = "-4623214324";
         const message = `
-🆕 Ariza - ${applications.length} 🟩 \n
-👤 Ismi Familiyasi: ${escapeMarkdown(form.values.name || "Kiritilmagan")}
-🗓 Tug'ilgan sanasi: ${escapeMarkdown(dayjs(form.values.birthday).format("DD/MM/YYYY") || "Kiritilmagan")}
-📞 Telefon: ${escapeMarkdown(form.values.phone || "Kiritilmagan")}
-🏫 Ta'lim muassasasini tugatgan yili: ${form.values.university_end || "Kiritilmagan"}
-🏢 Bakalavr yoki magistratura bosqichlaridan qaysi biriga topshirmoqchiligi: ${escapeMarkdown(form.values.university_step || "Kiritilmagan")}
-🎓 Qaysi mutaxassislik (yo‘nalish) bo‘yicha tahsil olmoqchiligi: ${escapeMarkdown(form.values.university_direction || "Kiritilmagan")}
-📚 Ta'lim turi: ${escapeMarkdown(form.values.type || "Kiritilmagan")}
-📍 Rossiyadagi qaysi shaharda tahsil olmoqchiligi: ${escapeMarkdown(form.values.city || "Kiritilmagan")}
-${form.values.condition === "Grant" ? "🟩" : "🟦"} Kontrakt yoki grant asosida topshirmoqchiligi: ${escapeMarkdown(form.values.condition || "Kiritilmagan")}
-🎯 Muayyan universitet: ${escapeMarkdown(form.values.university || "Kiritilmagan")}
-🇷🇺 Rus tilini qanchalik bilishi: ${escapeMarkdown(form.values.level || "Kiritilmagan")}
-✈️ Rossiyada bo'lganmi: ${escapeMarkdown(form.values.be_here || "Kiritilmagan")}
-🏡 Yoptoqxona kerakmi: ${escapeMarkdown(form.values.need_home || "Kiritilmagan")}
-👩‍👩‍👦‍👦 Rossiyada qarindoshlari bormi: ${escapeMarkdown(form.values.has_natives || "Kiritilmagan")}
+🆕 Ariza - ${applications.length}  \n
+👤 Ismi Familiyasi: ${escapeMarkdown(form.values.name || "Kiritilmagan")}  \n
+🗓 Tug'ilgan sanasi: ${escapeMarkdown(form.values.birthday || "Kiritilmagan")} \n
+📞 Telefon: ${escapeMarkdown(form.values.phone || "Kiritilmagan")} \n
+🏫 Ta'lim muassasasini tugatgan yili: ${form.values.university_end || "Kiritilmagan"} - ${form.values.school || "Kiritilmagan"} \n
+🏢 Bakalavr yoki magistratura bosqichlaridan qaysi biriga topshirmoqchiligi: ${escapeMarkdown(form.values.university_step || "Kiritilmagan")} \n
+🎓 Qaysi mutaxassislik (yo‘nalish) bo‘yicha tahsil olmoqchiligi: ${escapeMarkdown(form.values.university_direction || "Kiritilmagan")} \n
+📚 Ta'lim turi: ${escapeMarkdown(form.values.type || "Kiritilmagan")} \n
+📍 Rossiyadagi qaysi shaharda tahsil olmoqchiligi: ${escapeMarkdown(form.values.city || "Kiritilmagan")} \n
+${form.values.condition === "Grant" ? "🟩" : "🟦"} Kontrakt yoki grant asosida topshirmoqchiligi: ${escapeMarkdown(form.values.condition || "Kiritilmagan")} \n
+🎯 Muayyan universitet: ${escapeMarkdown(form.values.university || "Kiritilmagan")} \n
+🇷🇺 Rus tilini qanchalik bilishi: ${escapeMarkdown(form.values.level || "Kiritilmagan")} \n
+✈️ Rossiyada bo'lganmi: ${escapeMarkdown(form.values.be_here || "Kiritilmagan")} \n
+🏡 Yoptoqxona kerakmi: ${escapeMarkdown(form.values.need_home || "Kiritilmagan")} \n
+👩‍👩‍👦‍👦 Rossiyada qarindoshlari bormi: ${escapeMarkdown(form.values.has_natives || "Kiritilmagan")} \n
         `;
 
         console.log(message);
@@ -454,6 +457,20 @@ ${form.values.condition === "Grant" ? "🟩" : "🟦"} Kontrakt yoki grant asosi
 @keyframes spinner-c7wet2 {
   100% {
     transform: rotate(1turn);
+  }
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 200;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
   }
 }
 </style>
