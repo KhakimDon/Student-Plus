@@ -11,12 +11,6 @@ export { default as BaseButton } from "@/components/Base/Button/BaseButton.vue";
 //* --\*_*/-- Card Components
 export { default as BaseCard } from "@/components/Base/Card/BaseCard.vue";
 
-//* --\*_*/-- Chart Components
-export { default as BarChart } from "@/components/Base/Chart/BarChart.vue";
-export { default as GradientChart } from "@/components/Base/Chart/Line/GradientChart.vue";
-export { default as LineChart } from "@/components/Base/Chart/Line/LineChart.vue";
-export { default as StackChart } from "@/components/Base/Chart/StackChart.vue";
-
 //* --\*_*/-- Dropdown Components
 export { default as BaseDropdown } from "@/components/Base/Dropdown/BaseDropdown.vue";
 
@@ -54,14 +48,6 @@ export { default as BaseSidebar } from "@/components/Base/Sidebar/BaseSidebar.vu
 
 //* --\*_*/-- Tab Components
 export { default as BaseTab } from "@/components/Base/Tab/BaseTab.vue";
-
-//* --\*_*/-- Table Components
-export { default as BaseCell } from "@/components/Base/Table/BaseCell.vue";
-export { default as BaseTable } from "@/components/Base/Table/BaseTable.vue";
-export { default as TableHeader } from "@/components/Base/Table/Details/TableHeader.vue";
-export { default as BasePagination } from "@/components/Base/Pagination/BasePagination.vue";
-export { default as BaseTableCollapseFilter } from "@/components/Base/Table/Details/BaseTableCollapseFilter.vue";
-export { default as BaseTableIndicator } from "@/components/Base/Table/Details/BaseTableIndicator.vue";
 
 //* --\*_*/-- Tag Count Components
 export { default as BaseTagCount } from "@/components/Base/TagCount/BaseTagCount.vue";

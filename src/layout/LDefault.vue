@@ -23,7 +23,7 @@
 }
 .card-wrapper {
   background-size: cover;
-  background-image: url("https://images.unsplash.com/photo-1619013334699-c8310b1c137e?q=80&w=1972&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-image: url("https://i.ibb.co/Q3Dq1VPd/photo-1619013334699-c8310b1c137e.jpg");
 }
 * {
   transition-duration: 0.5s;

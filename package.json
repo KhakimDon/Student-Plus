@@ -24,6 +24,7 @@
     "axios": "^1.7.7",
     "canvas-confetti": "^1.9.3",
     "ckeditor5": "^44.0.0",
+    "firebase": "^11.5.0",
     "maska": "^3.1.1",
     "pinia": "^2.2.6",
     "radix-vue": "^1.9.9",
