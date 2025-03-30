@@ -1,7 +1,7 @@
 <template>
   <main>
     <h1 v-if="step !== 6" class="text-center font-[800]">
-      Qaysi universitet siz uchun mos!
+      Qaysi universitet siz uchun mos! version.1
     </h1>
     <div class="mx-auto w-max mt-4">
       <BaseStepper v-if="step !== 6" :current-step="step" :steps="steps" />
