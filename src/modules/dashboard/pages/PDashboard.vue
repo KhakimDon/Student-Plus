@@ -363,9 +363,6 @@ const submit = () => {
         }));
 
         function escapeMarkdown(text: unknown): string {
-          if (typeof text !== "string") {
-            return ""; // или можно text.toString(), если ожидаются числа
-          }
           return text;
         }
 
@@ -378,7 +375,7 @@ const submit = () => {
 👤 Ismi Familiyasi: ${escapeMarkdown(form.values.name || "Kiritilmagan")}
 🗓 Tug'ilgan sanasi: ${escapeMarkdown(dayjs(form.values.birthday).format("DD/MM/YYYY") || "Kiritilmagan")}
 📞 Telefon: ${escapeMarkdown(form.values.phone || "Kiritilmagan")}
-🏫 Ta'lim muassasasini tugatgan yili: ${escapeMarkdown(form.values.university_end || "Kiritilmagan")}
+🏫 Ta'lim muassasasini tugatgan yili: ${form.values.university_end || "Kiritilmagan"}
 🏢 Bakalavr yoki magistratura bosqichlaridan qaysi biriga topshirmoqchiligi: ${escapeMarkdown(form.values.university_step || "Kiritilmagan")}
 🎓 Qaysi mutaxassislik (yo‘nalish) bo‘yicha tahsil olmoqchiligi: ${escapeMarkdown(form.values.university_direction || "Kiritilmagan")}
 📚 Ta'lim turi: ${escapeMarkdown(form.values.type || "Kiritilmagan")}
