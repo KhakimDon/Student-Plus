@@ -1,7 +1,7 @@
 <template>
   <main>
     <h1 v-if="step !== 6" class="text-center font-[800]">
-      Qaysi universitet siz uchun mos! version.1
+      Qaysi universitet siz uchun mos!
     </h1>
     <div class="mx-auto w-max mt-4">
       <BaseStepper v-if="step !== 6" :current-step="step" :steps="steps" />
@@ -182,7 +182,7 @@
             v-else
             class="bg-primary mt-5 w-full h-[40px] flex-center rounded-md"
           >
-            <video autoplay muted loop src="@/assets/Comp.mp4" />
+            <img src="@/assets/Comp.gif" alt="Comp" />
           </div>
         </Transition>
       </div>
