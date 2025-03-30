@@ -40,24 +40,23 @@
         />
       </div>
       <div v-else-if="step == 2" class="mt-3">
-        <FormGroup label="Ta'lim muassasasini tugatgan yilingiz">
+        <FormGroup
+          label-class="text-xs"
+          label="Ta'lim muassasasini tugatgan yilingiz"
+        >
           <FormInput
             placeholder="Yilni kiriting"
             v-model="form.values.university_end"
             type="number"
             v-maska="'####'"
           />
-        </FormGroup>
-        <FormGroup
-          labelClass="text-xs"
-          label="Bakalavr yoki magistratura bosqichlaridan qaysi biriga topshirmoqchisiz"
-        >
           <FormRadioGroup
-            v-model="form.values.university_step"
-            :items="university_step_values"
+            v-model="form.values.school"
+            :items="school_values"
             class="mt-2"
           />
         </FormGroup>
+
         <FormGroup
           label="Qaysi mutaxassislik (yo‘nalish) bo‘yicha tahsil olmoqchisiz"
         >
@@ -73,7 +72,7 @@
           icon="icon-arrow-right"
           :disabled="
             form.$v.value.university_end.$invalid ||
-            form.$v.value.university_step.$invalid ||
+            form.$v.value.school.$invalid ||
             form.$v.value.university_direction.$invalid
           "
         />
@@ -94,7 +93,7 @@
             v-model="form.values.city"
           />
         </FormGroup>
-        <FormGroup label="Kontrakt yoki grant asosida topshirmoqchisiz">
+        <FormGroup label="Ta'lim asosini tanlang">
           <FormRadioGroup
             v-model="form.values.condition"
             :items="condition_values"
@@ -119,8 +118,13 @@
           label="Muayyan universitetni tanlaganmisiz? Agar tanlagan bo‘lsangiz, universitet nomini yozing"
         >
           <FormInput
-            placeholder="Universitet nomini kiriting"
+            placeholder="(Ixtiyoriy ravishda to'ldiring)"
             v-model="form.values.university"
+          />
+          <FormRadioGroup
+            v-model="form.values.university_step"
+            :items="university_step_values"
+            class="mt-2"
           />
         </FormGroup>
         <FormGroup label="Rus tilini qanchalik bilasiz">
@@ -130,15 +134,7 @@
             class="mt-2"
           />
         </FormGroup>
-        <FormGroup
-          label-class="text-xs"
-          label=" Ilgari Rossiyada bo‘lganmisiz? Agar bo‘lgan bo‘lsangiz, qachon va qaysi maqsadda? (Ish, o'qish, boshqa)"
-        >
-          <FormInput
-            placeholder="Ma'lumot kirting"
-            v-model="form.values.be_here"
-          />
-        </FormGroup>
+
         <BaseButton
           @click="changeStep(5)"
           class="w-full mt-5"
@@ -148,6 +144,13 @@
         />
       </div>
       <div v-else-if="step == 5" class="mt-3">
+        <FormGroup label=" Ilgari Rossiyada bo‘lganmisiz">
+          <FormRadioGroup
+            v-model="form.values.be_here"
+            :items="confirmation"
+            class="mt-2"
+          />
+        </FormGroup>
         <FormGroup label="Sizga Rossiyada yashash uchun yotoqxona kerakmi">
           <FormRadioGroup
             v-model="form.values.need_home"
@@ -156,7 +159,6 @@
           />
         </FormGroup>
         <FormGroup
-          label-class="text-xs"
           label="Rossiyada qarindoshlaringiz yoki yaqin insonlaringiz bormi"
         >
           <FormRadioGroup
@@ -250,6 +252,7 @@ const form = useForm(
     be_here: "",
     need_home: "",
     has_natives: "",
+    school: "",
   },
   {
     name: { required },
@@ -264,6 +267,8 @@ const form = useForm(
     level: { required },
     need_home: { required },
     has_natives: { required },
+    school: { required },
+    be_here: { required },
   },
 );
 
@@ -328,6 +333,20 @@ const confirmation = [
   {
     id: "Yo'q",
     name: "Yo'q",
+  },
+];
+const school_values = [
+  {
+    id: "Maktab",
+    name: "Maktab",
+  },
+  {
+    id: "Litsey",
+    name: "Litsey",
+  },
+  {
+    id: "Kollej",
+    name: "Kollej",
   },
 ];
 

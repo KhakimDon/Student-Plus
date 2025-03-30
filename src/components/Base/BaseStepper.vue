@@ -56,15 +56,15 @@ function checkStatus(target: number) {
 <style scoped>
 .done-styles {
   color: white !important;
-  border-color: #6ea8f7;
-  background: linear-gradient(to top, #4489f7, #6ea8f7);
+  border-color: #40af91;
+  background: linear-gradient(to top, #2e7d67, #40af91);
   box-shadow:
-    0px 41px 80px 0px rgba(68, 137, 247, 0.07),
-    0px 20.066px 42.849px 0px rgba(68, 137, 247, 0.06),
-    0px 12.585px 30.532px 0px rgba(68, 137, 247, 0.06),
-    0px 8.492px 23.32px 0px rgba(68, 137, 247, 0.05),
-    0px 5.725px 17.54px 0px rgba(68, 137, 247, 0.04),
-    0px 3.571px 12px 0px rgba(68, 137, 247, 0.03),
-    0px 1.715px 6.222px 0px rgba(68, 137, 247, 0.02);
+    0px 41px 80px 0px rgba(64, 175, 145, 0.07),
+    0px 20.066px 42.849px 0px rgba(64, 175, 145, 0.06),
+    0px 12.585px 30.532px 0px rgba(64, 175, 145, 0.06),
+    0px 8.492px 23.32px 0px rgba(64, 175, 145, 0.05),
+    0px 5.725px 17.54px 0px rgba(64, 175, 145, 0.04),
+    0px 3.571px 12px 0px rgba(64, 175, 145, 0.03),
+    0px 1.715px 6.222px 0px rgba(64, 175, 145, 0.02);
 }
 </style>
