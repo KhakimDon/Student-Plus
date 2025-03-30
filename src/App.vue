@@ -30,15 +30,32 @@ if (window?.visualViewport) {
 
 import { onMounted, onBeforeUnmount } from "vue";
 
+const getPlatform = (): string => {
+  const userAgent = navigator.userAgent.toLowerCase();
+  if (/android/.test(userAgent)) return "android";
+  if (/iphone|ipad|ipod/.test(userAgent)) return "ios";
+  return "other";
+};
+
+const platform = getPlatform();
+
 const handleFocus = () => {
-  document.querySelector(".card-wrapper-item").classList.add("fff");
-  document.querySelector(".card-wrapper-item").style.teransform =
-    "translateY(-100px)";
+  if (platform === "android") {
+    console.log("Android");
+  } else if (platform === "ios") {
+    document.querySelector(".card-wrapper-item").classList.add("fff");
+    document.querySelector(".card-wrapper-item").style.teransform =
+      "translateY(-100px)";
+  }
 };
 const handleFocusOut = () => {
-  document.querySelector(".card-wrapper-item").classList.remove("fff");
-  document.querySelector(".card-wrapper-item").style.teransform =
-    "translateY(-100px)";
+  if (platform === "android") {
+    console.log("Android");
+  } else {
+    document.querySelector(".card-wrapper-item").classList.remove("fff");
+    document.querySelector(".card-wrapper-item").style.teransform =
+      "translateY(-100px)";
+  }
 };
 
 onMounted(() => {

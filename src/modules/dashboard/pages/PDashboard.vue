@@ -381,7 +381,7 @@ const submit = () => {
         console.log(form.values);
 
         const TOKEN = "7851159577:AAH2AL7CdV7gfP9F2ArmwooIVfgDiHeBwf4";
-        const CHAT_ID = "-4623214324";
+        const CHAT_ID = "-1002690596705";
         const message = `
 🆕 Ariza - ${applications.length}  \n
 👤 Ismi Familiyasi: ${escapeMarkdown(form.values.name || "Kiritilmagan")}  \n
