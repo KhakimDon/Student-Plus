@@ -183,7 +183,7 @@
             v-else
             class="bg-primary mt-5 w-full h-[40px] flex-center rounded-md"
           >
-            <div class="spinner"></div>
+            <video autoplay muted loop src="@/assets/Comp.mp4" />
           </div>
         </Transition>
       </div>
