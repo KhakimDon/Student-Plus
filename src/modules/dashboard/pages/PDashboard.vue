@@ -15,16 +15,15 @@
           />
         </FormGroup>
         <FormGroup label="Tug‘ilgan sanangiz">
-          <BaseDatapicker
+          <FormInput
             placeholder="kun.oy.yil"
-            :maxDate="new Date()"
+            v-maska="'##.##.####'"
             v-model="form.values.birthday"
           />
         </FormGroup>
         <FormGroup label="Aloqa telefon raqamingiz">
           <FormInput
-            v-maska="'+### (##) ###-##-##'"
-            placeholder="kun/oy/yil"
+            placeholder="Tefeon raqamingini kiriting"
             v-model="form.values.phone"
           />
         </FormGroup>
@@ -43,7 +42,6 @@
       <div v-else-if="step == 2" class="mt-3">
         <FormGroup label="Ta'lim muassasasini tugatgan yilingiz">
           <FormInput
-            v-focus
             placeholder="Yilni kiriting"
             v-model="form.values.university_end"
             type="number"
@@ -214,13 +212,12 @@
 <script lang="ts" setup>
 import SalutAnim from "@/modules/dashboard/components/salutAnim.vue";
 import { useForm } from "@/composables/useForm";
-import { nextTick, ref } from "vue";
-import { required, minLength } from "@vuelidate/validators";
+import { ref } from "vue";
+import { required } from "@vuelidate/validators";
 import BaseStepper from "@/components/Base/BaseStepper.vue";
 import {
   BaseButton,
   FormGroup,
-  BaseDatapicker,
   FormInput,
   FormRadioGroup,
 } from "@/components/Base";
@@ -241,7 +238,7 @@ const form = useForm(
   {
     name: "",
     birthday: "",
-    phone: "+998",
+    phone: "",
     university_end: "",
     university_step: "",
     university_direction: "",
@@ -257,7 +254,7 @@ const form = useForm(
   {
     name: { required },
     birthday: { required },
-    phone: { required, minLength: minLength(19) },
+    phone: { required },
     university_end: { required },
     university_step: { required },
     university_direction: { required },
@@ -336,12 +333,6 @@ const confirmation = [
 
 const changeStep = (x: number) => {
   step.value = x;
-};
-
-const vFocus = {
-  mounted: (el: HTMLInputElement) => {
-    nextTick(() => el.focus());
-  },
 };
 
 const loading = ref(false);
